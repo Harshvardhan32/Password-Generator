@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="style.css">
+    <link rel="shortcut icon" href="../image/Harshvardhan.jpg" type="image/x-icon">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@3.2.0/fonts/remixicon.css" rel="stylesheet">
+    <title>Password Generator App</title>
+
+    <style>
+        input::placeholder {
+            color: yellow;
+            font-weight: 600;
+        }
+
+        input{
+            outline: none;
+            background-color: transparent;
+        }
+
+        .check input {
+            appearance: none;
+            width: 15px;
+            height: 15px;
+            border: 1px solid cyan;
+            border-radius: 3px;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .check input:checked {
+            background-color: aqua;
+        }
+
+        .check input:checked::before {
+            content: '✓';
+            position: absolute;
+            color: rgb(24, 24, 24);
+            font-weight: bold;
+            margin-top: -5px;
+            margin-left: 1px;
+            transform: translateX(20%) translateY(-10%);
+        }
+
+        .rangeCheck input {
+            appearance: none;
+            border-radius: 8px;
+            height: 10px;
+            cursor: pointer;
+            background-color: blueviolet;
+            background-size: cover;
+        }
+
+        .rangeCheck input::-webkit-slider-thumb {
+            appearance: none;
+            position: relative;
+            width: 25px;
+            height: 25px;
+            border-radius: 50%;
+            background-color: #e8c307;
+            box-shadow: 0px 0px 40px 2px rgb(232, 168, 7);
+            transition: all 100ms ease-in;
+        }
+
+        .rangeCheck input:focus {
+            outline: 2px solid rgb(232, 168, 7);
+        }
+
+        .rangeCheck input::-webkit-slider-thumb:hover {
+            background-color: black;
+            outline: 2px solid rgb(232, 168, 7);
+            box-shadow: 0px 0px 25px 5px rgb(232, 168, 7);
+            z-index: 1;
+        }
+
+        .rangeCheck input::-moz-range-thumb {
+            appearance: none;
+            position: relative;
+            width: 25px;
+            height: 25px;
+            border-radius: 50%;
+            background-color: #e8c307;
+            box-shadow: 0px 0px 40px 2px rgb(232, 168, 7);
+            transition: all 100ms ease-in;
+        }
+
+        .rangeCheck input::-moz-range-thumb:hover {
+            background-color: black;
+            outline: 2px solid rgb(232, 168, 7);
+            box-shadow: 0px 0px 25px 5px rgb(232, 168, 7);
+            z-index: 1;
+        }
+
+        .tooltip {
+            position: absolute;
+            background-color: rgb(242, 4, 202);
+            color: #e8c307;
+            font-weight: 600;
+            border-radius: 5px;
+            padding: 0px 8px;
+            margin-top: -30px;
+            margin-left: -35px;
+            transform: scale(0);
+            transition: all 200ms ease-in;
+        }
+
+        .tooltip.active {
+            transform: scale(1);
+        }
+    </style>
+
+</head>
+
+<body class="bg-gradient-to-bl from-violet-600 to-fuchsia-700">
+
+    <div class="w-[100vw] h-[100vh] flex flex-col justify-center items-center text-white">
+
+        <div class="w-3/12">
+
+            <div class="text-center my-4">
+                <h2 class="font-bold text-2xl">PASSWORD GENERATOR</h2>
+            </div>
+
+            <!-- password display section -->
+
+            <div
+                class="flex p-4 border-b-4 border-fuchsia-500 rounded-lg justify-between my-6 bg-gray-950 bg-opacity-90">
+
+                <input type="text" class="bg-gray-950 p-2 border-gray-900" placeholder="PASSWORD" data-passwordDisplay>
+                <button data-copy>
+                    <span data-copyMsg class="tooltip"></span>
+                    <i class="ri-file-copy-line text-cyan-500 font-medium"></i>
+                </button>
+
+            </div>
+
+            <!-- password property section -->
+
+            <div class="border-b-4 border-fuchsia-500 rounded-lg my-6 p-6 bg-gray-950 bg-opacity-90">
+
+                <div class="flex justify-between pb-3">
+                    <p class="text-lg font-medium">Password Length</p>
+                    <p class="text-lg font-medium text-yellow-200" dataLengthNumber>0</p>
+                </div>
+
+                <div class="rangeCheck">
+                    <input type="range" min="1" max="20" value="10" step="1" class="w-full bg-fuchsia-500" dataSlider>
+                </div>
+
+                <div class="my-3 font-medium check">
+                    <input type="checkbox" name="" id="uppercase" class="mr-4 mt-2">
+                    <label for="uppercase">Include Uppercase Letters</label> <br>
+                    <input type="checkbox" name="" id="lowercase" class="mr-4 mt-2">
+                    <label for="lowercase">Include Lowercase Letters</label> <br>
+                    <input type="checkbox" name="" id="numbers" class="mr-4 mt-2">
+                    <label for="numbers">Include Numbers</label> <br>
+                    <input type="checkbox" name="" id="symbols" class="mr-4 mt-2">
+                    <label for="symbols">Include Symbols</label>
+                </div>
+
+                <!-- password strength section -->
+
+                <div class="flex justify-between items-center">
+
+                    <div class="text-lg font-medium">Strength</div>
+                    <div class="" data-indicator></div>
+
+                </div>
+
+                <!-- Generator password section -->
+
+                <div class="text-center mt-5">
+
+                    <button
+                        class="generateButton bg-fuchsia-600 text-yellow-200 font-bold border-b-4 border-yellow-400 w-full rounded-md py-2">GENERATE
+                        PASSWORD</button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <script src="index1.js"></script>
+
+</body>
+
+</html>
